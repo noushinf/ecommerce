@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<table>
+    <tr>
+    <td>
+<tr>
+<table>
+    <tr>
+        <td class="title">
+            <img src="{% static 'img/favicon.png' %}" style="width:100%; max-width: 300px" />
+        </td>
+        <td>
+            invoice:{{ payment_status.order_id }}<br/>
+            date :{{ order.order_date }}n<br/>
+
+        </td>
+    </tr>
+    <tr class="information">
+        <td colspan="2">
+            <table>
+                <tr>
+                    <td>
+                        my company Name<br/>
+                        my address
+
+                    </td>
+                    <td>
+                        {{ order.user.username }}<br/>
+                        {{ checkout_address.street_address }}<br/>
+                        {{ checkout_address.country.name }}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr class="heading">
+        <td>payment method   </td>
+        <td >check</td>
+    </tr>
+    <tr class="detail">
+        <td>{{ payment_status.method}}</td>
+        <td>{{ payment_status.id }}</td>
+    </tr>
+    <tr class="heading">
+        <td>item</td>
+        <td>count</td>
+        <td>price</td>
+    </tr>
+    {% for item in payment_status.items.all %}
+    <tr class="item">
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.get_total_item_price }}</td>
+    </tr>
+    {% endfor %}
+    <tr class="total">
+        <td ></td>
+        <td>total:{{ order.get_total_price}}</td>
+    </tr>
+</table>
+</td>
+</tr>
+    <tr class="information">
+        <td colspan="2">
+            <table>
+
+            </table>
+        </td>
+    </tr>
+</table>
+<div>
+    <button id="pdf">pdf</button>
+</div>
+</body>
+<script>
+    document.querySelector("button").addEventListener("click",function (){
+        window.print();
+    })
+</script>
+</html>

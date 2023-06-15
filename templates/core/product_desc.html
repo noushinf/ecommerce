@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+{% load card_template_tag %}
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>Product Descriptions</title>
+    <meta content="" name="description">
+  <meta content="" name="keywords">
+
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static  'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Bethany
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+  <!-- =======================================================
+  * Template Name: Bethany
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+
+
+<!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container">
+      <div class="header-container d-flex align-items-center justify-content-between">
+        <div class="logo">
+          <h1 class="text-light"><a href="index.html"><span>Bethany</span></a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav id="navbar" class="navbar">
+          <ul>
+                          {% if user.is_authenticated %}
+            <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
+            <li><a class="nav-link scrollto active" href="{% url 'orderlist' %}">card&nbsp;</a>
+             <div style="color: red">{{ request.user| card_item_count }}</div>
+            </li>
+                   {% if user.is_superuser %}
+              <li><a class="nav-link scrollto active" href="{% url 'add_product' %}">Add Product</a></li>
+                  {% endif %}
+                       <li><a class="nav-link scrollto active" href="#hero">welcom {{ user.username }}</a></li>
+                  <li><a class="getstarted scrollto" href="{% url 'user_logout' %} ">logout</a></li>
+
+               {% else %}
+              <li><a class="getstarted scrollto" href="{% url 'user_login' %}">login</a></li>
+              <li><a class="getstarted scrollto" href="{% url 'user_register' %}">register</a></li>
+              {% endif %}
+            <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+ </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+      </div><!-- End Header Container -->
+    </div>
+  </header><!-- End Header -->
+<body class="container">
+<div class="card">
+    <div class="container-fluid">
+        <div class="wrapper row ">
+            <div class="preview col-md-6">
+                <div class="preview-pic tab-content">
+                    <div class="tab-pane active" id="pic-1">
+                        <img src="{{ product.img.url }}">
+
+                    </div>
+                    <div class="detail col-md-6">
+                        <h3>{{ product.name }}</h3>
+                        <h3>{{ product.desc}}</h3>
+                        <h3>{{ product.price }}</h3>
+                        <h3>{{ product.name }}</h3>
+                    </div>
+                    <div class="action">
+                        <a href="{% url 'add_to_card' product.pk %}">Add To Card</a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{%  load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie-edge">
+
+    <title>AddProduct</title>
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    crossorigin="anonymous">
+
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css"
+    crossorigin="anonymous">
+
+<link rel="stylesheet"
+    href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css"
+     crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+    crossorigin="anonymous"></script>
+
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+
+    {% if messages %}
+    {% for message in messages %}
+        <h1 class="login-title" style="color: red";>{{ message }}</h1>
+    {% endfor %}
+{% endif %}
+
+</head>
+<body>
+<form enctype="multipart/form-data" method="post" >
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        {{ field }}
+    </div>
+    {% endfor %}
+
+    <button type="submit" id="add_product" class="btn btn-block login-btn" name="add_product" value="Add Product">Add product</button>
+</form>
+</body>
+</html>
