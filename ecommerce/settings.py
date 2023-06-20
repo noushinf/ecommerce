@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
-     'django_countries',
+    'django_countries',
     'accounts.apps.AccountsConfig',
 ]
 CSRF_TRUSTED_ORIGINS = []
@@ -52,7 +52,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'ecommerce.urls'
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR/"media"
+MEDIA_ROOT = BASE_DIR / "media"
 RAZORPAY_ID = "rzp_test_7dj9N4gFvnbUpl"
 RAZORPAY_SECRET = "VJsDP8by8Ib5hV0tJt9aRWbY"
 
@@ -70,7 +70,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
 
-
         },
     },
 ]
@@ -79,7 +78,17 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+# postgrs
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'postgres',
+#        'USER': 'postgres',
+#        'PASSWORD': 'hunter2',
+#        'HOST': 'db'
+#   }
+# }
+# sqlight
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
