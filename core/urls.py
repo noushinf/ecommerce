@@ -1,5 +1,6 @@
 from django.urls import path
 from core import views
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('add_producut', views.add_product, name='add_product'),
@@ -12,7 +13,6 @@ urlpatterns = [
     path('payment', views.payment, name='payment'),
     path('handlerequest', views.handlerequest, name='handlerequest'),
     path("invoice", views.invoice, name='invoice'),
-    path("render_pdf_view", views.render_pdf_view, name='render_pdf_view')
-
+    path("render_pdf_view", views.render_pdf_view, name='render_pdf_view'),
 
 ]

@@ -9,10 +9,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
-from django_xhtml2pdf.utils import generate_pdf
+# from django_xhtml2pdf.utils import generate_pdf
 import os
 from django.contrib.staticfiles import finders
-#from xhtml2pdf import pisa
+# from xhtml2pdf import pisa
 
 import razorpay
 
@@ -148,7 +148,7 @@ def remove_item(request, pk):
 
 def checkout_page(request):
     if CheckoutAddress.objects.filter(user=request.user).exists():
-       # messages.info(request, 'uuuuuuu')
+        # messages.info(request, 'uuuuuuu')
 
         return render(request, 'core/checkout_address.html', {'payment_allow': 'allow'})
     if request.method == "POST":
@@ -178,8 +178,8 @@ def checkout_page(request):
             return redirect('checkout_page')
     else:
         form = CheckoutForm()
-       # payment(request)
-        #messages.info(request,'yyyyyyyyyyy')
+        # payment(request)
+        # messages.info(request,'yyyyyyyyyyy')
         return render(request, 'core/checkout_address.html', {'form': form})
 
 
@@ -300,9 +300,9 @@ def render_pdf_view(request):
     responce['content-disposition'] = 'attachment; filename="report.pdf"'
     template = get_template(template_path)
     html = template.render(context)
-    pisa_status = generate_pdf.CreatPDF(
-        html, dest=responce
-    )
-    if pisa_status.err:
-        return HttpResponse('we have some error' + html)
+  #  pisa_status = generate_pdf.CreatPDF(
+   #     html, dest=responce
+   # )
+  #  if pisa_status.err:
+   #     return HttpResponse('we have some error' + html)
     return responce
