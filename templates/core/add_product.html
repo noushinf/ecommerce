@@ -40,7 +40,11 @@
 {% endif %}
 
 </head>
-<body>
+<body  class="container">
+<div class="card">
+    <div class="container-fluid">
+        <div class="wrapper row ">
+            <div class="preview col-md-6">
 <form enctype="multipart/form-data" method="post" >
     {% csrf_token %}
     {% for field in form.visible_fields %}
@@ -52,5 +56,9 @@
 
     <button type="submit" id="add_product" class="btn btn-block login-btn" name="add_product" value="Add Product">Add product</button>
 </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
