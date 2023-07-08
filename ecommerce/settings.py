@@ -103,14 +103,18 @@ DATABASES = {
 #    }
 # }
 # redis
+REDIS_URL = 'redis-app'
+REDIS_PORT = '6379'
+REDIS_CASHED_TIME = '60'
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": [
-            "redis://127.0.0.1:6379",  # leader
-            "redis://127.0.0.1:6378",  # read-replica 1
-            "redis://127.0.0.1:6377",  # read-replica 2
-        ],
+        "LOCATION": 'redis://{}:{}/'.format(REDIS_URL, REDIS_PORT),
+        # "LOCATION": [
+        #    "redis://127.0.0.1:6379",  # leader
+        #    "redis://127.0.0.1:6378",  # read-replica 1
+        #   "redis://127.0.0.1:6377",  # read-replica 2
+        # ],
         # "OPTIONS": {
         #    "CLIENT_CLASS": "django_redis.client.DefaultClient",
         #   "PICKLE_VERSION": -1,  # Will use highest protocol version available

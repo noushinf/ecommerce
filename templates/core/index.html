@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
+{% load cache %}
 {% load card_template_tag %}
+{% load event_tags %}
 
 <html lang="en">
 
@@ -135,6 +137,7 @@
 
         <div class="row content">
           <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+          {% cashe REDIS_CASHED_TIME events  %}
               {% for product in products %}
             <div class="col">
             <div class="card">
@@ -160,6 +163,7 @@
 
             </div>
          {% endfor %}
+          {% endcache %}
           </div>
 
         </div>

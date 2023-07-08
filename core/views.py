@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
+from django.views.generic import ListView
 # from django_xhtml2pdf.utils import generate_pdf
 import os
 from django.contrib.staticfiles import finders
@@ -20,10 +21,23 @@ razorpay_client = razorpay.Client(auth=(settings.RAZORPAY_ID, settings.RAZORPAY_
 
 
 # Create your views here.
+# context_object_name = 'product'
+
 
 def index(request):
     products = Product.objects.all()
     return render(request, 'core/index.html', {'products': products})
+
+
+class ProductListview(ListView):
+    model = Product
+    template_name = 'core/index.html'
+    context_object_name = 'events'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductListview, self).get_context_data()
+        context['REDIS_CASHED_TIME'] = settings.REDIS_CASHED_TIME
+        return context
 
 
 def add_product(request):
@@ -300,9 +314,9 @@ def render_pdf_view(request):
     responce['content-disposition'] = 'attachment; filename="report.pdf"'
     template = get_template(template_path)
     html = template.render(context)
-  #  pisa_status = generate_pdf.CreatPDF(
-   #     html, dest=responce
-   # )
-  #  if pisa_status.err:
-   #     return HttpResponse('we have some error' + html)
+    #  pisa_status = generate_pdf.CreatPDF(
+    #     html, dest=responce
+    # )
+    #  if pisa_status.err:
+    #     return HttpResponse('we have some error' + html)
     return responce
