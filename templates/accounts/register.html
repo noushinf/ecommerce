@@ -9,7 +9,12 @@
     {% endfor %}
 {% endif %}
 </head>
-<body>
+<body class="container">
+<div class="card">
+    <div class="container-fluid">
+        <div class="wrapper row ">
+            <div class="preview col-md-6">
+
 <form method="post">
     {% csrf_token %}
 
@@ -20,6 +25,10 @@
     <input type="text" name="phone_field" id="phone_field" placeholder="phonefield">
     <button type="submit">register</button>
 </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

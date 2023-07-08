@@ -102,7 +102,27 @@ DATABASES = {
 #        'NAME': BASE_DIR / 'db.sqlite3',
 #    }
 # }
-
+# redis
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": [
+            "redis://127.0.0.1:6379",  # leader
+            "redis://127.0.0.1:6378",  # read-replica 1
+            "redis://127.0.0.1:6377",  # read-replica 2
+        ],
+        # "OPTIONS": {
+        #    "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        #   "PICKLE_VERSION": -1,  # Will use highest protocol version available
+        #   "SOCKET_CONNECT_TIMEOUT": 5,  # seconds
+        #  "SOCKET_TIMEOUT": 5,  # seconds
+        # "PASSWORD": "admin13@",
+        # "CLOSE_CONNECTION": True,
+        # }
+    }
+}
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
