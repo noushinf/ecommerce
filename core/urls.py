@@ -1,7 +1,12 @@
 from django.urls import path
 from core import views
+from django.views.decorators.cache import cache_page
+from django.conf import settings
+
+from core.views import ProductListview
 
 urlpatterns = [
+    # path('', cache_page(settings.REDIS_CASHED_TIME)(ProductListview.as_view()),name='index'),
     path('', views.index, name='index'),
     path('add_producut', views.add_product, name='add_product'),
     path('product_desc/<int:pk>', views.product_dec, name='product_desc'),

@@ -10,6 +10,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
 from django.views.generic import ListView
+import timeit
 # from django_xhtml2pdf.utils import generate_pdf
 import os
 from django.contrib.staticfiles import finders
@@ -36,6 +37,7 @@ class ProductListview(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductListview, self).get_context_data()
+        timeit.timeit(lambda: '-'.join(map(str, range(1000))), number=100)
         context['REDIS_CASHED_TIME'] = settings.REDIS_CASHED_TIME
         return context
 

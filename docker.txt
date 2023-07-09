@@ -1,0 +1,30 @@
+ docker network create --subnet=160.100.0.1/16 app-net
+ docker network list
+docker run -d postgres --name app-db --cpus 0.5 --memory 512m -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=admin
+13@ -ePOSTGRES_DB =ecommerce --net app-net postgresq 
+
+#start web container
+ docker run -itd --name web-app-1 -v ${PWD}:/code --cpus 0.5 --memory 512m -p 8080:8000 --workdir /code --net app-n
+et -e docker_container_id=1 python:3.10
+
+docker ps -a  
+docker exec -it web-app-1 bash
+pip install -r requirements.txt 
+python manage.py makemigrations
+python manage.py migrate
+
+ docker run -itd --name load-tester --cpus 2 --memory 2g  --net app-net node:latest
+docker ps -a  
+docker stats load-tester web-app-1 
+docker exec -it load-tester  bash    
+ npm install -g loadtest
+apt-get update && apt-get install -y curl nano
+docker exec web-app-1 sh -c "python manage.py runserver 0.0.0.0:8000"
+
+curl http://web-ap-1:8000
+loadtest -c 1 --rps 1 http://web-app-1:8000
+
+
+
+
+
